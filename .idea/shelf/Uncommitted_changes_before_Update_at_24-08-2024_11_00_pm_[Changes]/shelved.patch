@@ -1,0 +1,353 @@
+Index: Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/entity/Supplier.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Assignment.API.entity;\r\n\r\nimport jakarta.persistence.*;\r\nimport java.util.Set;\r\n\r\n@Entity\r\npublic class Supplier {\r\n\r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    private Long supplierId;\r\n\r\n    private String companyName;\r\n\r\n    private String website;\r\n\r\n    private String location;\r\n\r\n\r\n    private String natureOfBusiness;\r\n\r\n      @ElementCollection\r\n    private Set<String> manufacturingProcesses;\r\n\r\n    // Getters and Setters\r\n    public Long getSupplierId() {\r\n        return supplierId;\r\n    }\r\n\r\n    public void setSupplierId(Long supplierId) {\r\n        this.supplierId = supplierId;\r\n    }\r\n\r\n    public String getCompanyName() {\r\n        return companyName;\r\n    }\r\n\r\n    public void setCompanyName(String companyName) {\r\n        this.companyName = companyName;\r\n    }\r\n\r\n    public String getWebsite() {\r\n        return website;\r\n    }\r\n\r\n    public void setWebsite(String website) {\r\n        this.website = website;\r\n    }\r\n\r\n    public String getLocation() {\r\n        return location;\r\n    }\r\n\r\n    public void setLocation(String location) {\r\n        this.location = location;\r\n    }\r\n\r\n    public String getNatureOfBusiness() {\r\n        return natureOfBusiness;\r\n    }\r\n\r\n    public void setNatureOfBusiness(String natureOfBusiness) {\r\n        this.natureOfBusiness = natureOfBusiness;\r\n    }\r\n\r\n    public Set<String> getManufacturingProcesses() {\r\n        return manufacturingProcesses;\r\n    }\r\n\r\n    public void setManufacturingProcesses(Set<String> manufacturingProcesses) {\r\n        this.manufacturingProcesses = manufacturingProcesses;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/entity/Supplier.java b/Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/entity/Supplier.java
+--- a/Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/entity/Supplier.java	(revision 32bc3940623b767ba6a03768eb1b1af07fcc0256)
++++ b/Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/entity/Supplier.java	(date 1724495731117)
+@@ -1,8 +1,14 @@
+ package Assignment.API.entity;
+ 
+ import jakarta.persistence.*;
++import lombok.AllArgsConstructor;
++import lombok.Data;
++import lombok.NoArgsConstructor;
++
+ import java.util.Set;
+-
++@Data
++@AllArgsConstructor
++@NoArgsConstructor
+ @Entity
+ public class Supplier {
+ 
+@@ -16,58 +22,11 @@
+ 
+     private String location;
+ 
+-
+-    private String natureOfBusiness;
++    @Enumerated(EnumType.STRING)
++    private NatureOfBusiness natureOfBusiness;
+ 
+-      @ElementCollection
+-    private Set<String> manufacturingProcesses;
+-
+-    // Getters and Setters
+-    public Long getSupplierId() {
+-        return supplierId;
+-    }
+-
+-    public void setSupplierId(Long supplierId) {
+-        this.supplierId = supplierId;
+-    }
+-
+-    public String getCompanyName() {
+-        return companyName;
+-    }
+-
+-    public void setCompanyName(String companyName) {
+-        this.companyName = companyName;
+-    }
++    @ElementCollection
++    @Enumerated(EnumType.STRING)
++    private Set<ManufacturingProcess> manufacturingProcesses;
+ 
+-    public String getWebsite() {
+-        return website;
+-    }
+-
+-    public void setWebsite(String website) {
+-        this.website = website;
+-    }
+-
+-    public String getLocation() {
+-        return location;
+-    }
+-
+-    public void setLocation(String location) {
+-        this.location = location;
+-    }
+-
+-    public String getNatureOfBusiness() {
+-        return natureOfBusiness;
+-    }
+-
+-    public void setNatureOfBusiness(String natureOfBusiness) {
+-        this.natureOfBusiness = natureOfBusiness;
+-    }
+-
+-    public Set<String> getManufacturingProcesses() {
+-        return manufacturingProcesses;
+-    }
+-
+-    public void setManufacturingProcesses(Set<String> manufacturingProcesses) {
+-        this.manufacturingProcesses = manufacturingProcesses;
+-    }
+ }
+Index: Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/entity/NatureOfBusiness.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Assignment.API.entity;\r\n\r\npublic enum NatureOfBusiness {\r\n    SMALL_SCALE, MEDIUM_SCALE, LARGE_SCALE\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/entity/NatureOfBusiness.java b/Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/entity/NatureOfBusiness.java
+--- a/Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/entity/NatureOfBusiness.java	(revision 32bc3940623b767ba6a03768eb1b1af07fcc0256)
++++ b/Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/entity/NatureOfBusiness.java	(date 1724496275995)
+@@ -1,5 +1,5 @@
+ package Assignment.API.entity;
+ 
+ public enum NatureOfBusiness {
+-    SMALL_SCALE, MEDIUM_SCALE, LARGE_SCALE
++    small_scale, medium_scale, large_scale
+ }
+Index: Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/service/SupplierService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Assignment.API.service;\r\n\r\n\r\n\r\nimport Assignment.API.entity.ManufacturingProcess;\r\nimport Assignment.API.entity.NatureOfBusiness;\r\nimport Assignment.API.entity.Supplier;\r\nimport Assignment.API.repo.SupplierRepository;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\n\r\nimport org.springframework.data.domain.Page;\r\nimport org.springframework.data.domain.PageRequest;\r\nimport org.springframework.data.domain.Pageable;\r\nimport org.springframework.stereotype.Service;\r\n\r\nimport java.util.List;\r\nimport java.util.Set;\r\n\r\n@Service\r\npublic class SupplierService {\r\n\r\n    @Autowired\r\n    private SupplierRepository supplierRepository;\r\n\r\n    public List<Supplier> searchSuppliers(\r\n            String location,\r\n            String natureOfBusiness,\r\n            Set<String> manufacturingProcesses,\r\n            int page,\r\n            int size) {\r\n\r\n          Pageable pageable = PageRequest.of(page, size);\r\n          List<Supplier> supp= supplierRepository.findByLocationAndNatureOfBusinessAndManufacturingProcessesIn(\r\n                location, natureOfBusiness, manufacturingProcesses, pageable);\r\n          return supp;\r\n    }\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/service/SupplierService.java b/Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/service/SupplierService.java
+--- a/Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/service/SupplierService.java	(revision 32bc3940623b767ba6a03768eb1b1af07fcc0256)
++++ b/Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/service/SupplierService.java	(date 1724498074061)
+@@ -18,21 +18,18 @@
+ 
+ @Service
+ public class SupplierService {
+-
+     @Autowired
+     private SupplierRepository supplierRepository;
+-
+-    public List<Supplier> searchSuppliers(
++    public Page<Supplier> searchSuppliers(
+             String location,
+-            String natureOfBusiness,
+-            Set<String> manufacturingProcesses,
++            NatureOfBusiness natureOfBusiness,
++            Set<ManufacturingProcess> manufacturingProcesses,
+             int page,
+             int size) {
+ 
+-          Pageable pageable = PageRequest.of(page, size);
+-          List<Supplier> supp= supplierRepository.findByLocationAndNatureOfBusinessAndManufacturingProcessesIn(
++        Pageable pageable = PageRequest.of(page, size);
++        return supplierRepository.findByLocationAndNatureOfBusinessAndManufacturingProcessesIn(
+                 location, natureOfBusiness, manufacturingProcesses, pageable);
+-          return supp;
+     }
+ }
+ 
+Index: Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/controller/SupplierController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Assignment.API.controller;\r\n\r\nimport Assignment.API.dto.SupplierSearchRequest;\r\nimport Assignment.API.entity.Supplier;\r\nimport Assignment.API.service.SupplierService;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.http.HttpStatus;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.web.bind.annotation.*;\r\nimport java.util.List;\r\n\r\n@RestController\r\n@RequestMapping(\"/api/supplier\")\r\npublic class SupplierController {\r\n\r\n    @Autowired\r\n    private SupplierService supplierService;\r\n\r\n    @PostMapping(\"/query\")\r\n    public ResponseEntity<List<Supplier>> searchSuppliers(\r\n             @RequestBody SupplierSearchRequest searchRequest\r\n            ) {\r\n        List<Supplier> suppliers = supplierService.searchSuppliers(\r\n                searchRequest.getLocation(),\r\n                searchRequest.getNatureOfBusiness(),\r\n                searchRequest.getManufacturingProcesses(),\r\n                0,\r\n                5\r\n        );\r\n        return new ResponseEntity<>(suppliers, HttpStatus.OK);\r\n    }\r\n}\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/controller/SupplierController.java b/Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/controller/SupplierController.java
+--- a/Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/controller/SupplierController.java	(revision 32bc3940623b767ba6a03768eb1b1af07fcc0256)
++++ b/Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/controller/SupplierController.java	(date 1724489479749)
+@@ -4,10 +4,11 @@
+ import Assignment.API.entity.Supplier;
+ import Assignment.API.service.SupplierService;
+ import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.data.domain.Page;
+ import org.springframework.http.HttpStatus;
+ import org.springframework.http.ResponseEntity;
++import org.springframework.validation.annotation.Validated;
+ import org.springframework.web.bind.annotation.*;
+-import java.util.List;
+ 
+ @RestController
+ @RequestMapping("/api/supplier")
+@@ -17,18 +18,19 @@
+     private SupplierService supplierService;
+ 
+     @PostMapping("/query")
+-    public ResponseEntity<List<Supplier>> searchSuppliers(
+-             @RequestBody SupplierSearchRequest searchRequest
+-            ) {
+-        List<Supplier> suppliers = supplierService.searchSuppliers(
++    public ResponseEntity<Page<Supplier>> searchSuppliers(
++            @Validated @RequestBody SupplierSearchRequest searchRequest,
++            @RequestParam(defaultValue = "0") int page,
++            @RequestParam(defaultValue = "10") int size) {
++
++        Page<Supplier> suppliers = supplierService.searchSuppliers(
+                 searchRequest.getLocation(),
+                 searchRequest.getNatureOfBusiness(),
+                 searchRequest.getManufacturingProcesses(),
+-                0,
+-                5
++                page,
++                size
+         );
++
+         return new ResponseEntity<>(suppliers, HttpStatus.OK);
+     }
+ }
+-
+-
+Index: Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/repo/SupplierRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Assignment.API.repo;\r\n\r\n\r\nimport Assignment.API.entity.Supplier;\r\n\r\nimport org.springframework.data.domain.Pageable;\r\nimport org.springframework.data.jpa.repository.JpaRepository;\r\n\r\nimport java.util.List;\r\nimport java.util.Set;\r\n\r\npublic interface SupplierRepository extends JpaRepository<Supplier, Long> {\r\n    List<Supplier> findByLocationAndNatureOfBusinessAndManufacturingProcessesIn(\r\n            String location,\r\n            String natureOfBusiness,\r\n            Set<String> manufacturingProcesses,\r\n            Pageable pageable\r\n    );\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/repo/SupplierRepository.java b/Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/repo/SupplierRepository.java
+--- a/Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/repo/SupplierRepository.java	(revision 32bc3940623b767ba6a03768eb1b1af07fcc0256)
++++ b/Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/repo/SupplierRepository.java	(date 1724489616234)
+@@ -1,19 +1,22 @@
+ package Assignment.API.repo;
+ 
+ 
++import Assignment.API.entity.ManufacturingProcess;
++import Assignment.API.entity.NatureOfBusiness;
+ import Assignment.API.entity.Supplier;
+ 
++import org.springframework.data.domain.Page;
+ import org.springframework.data.domain.Pageable;
+ import org.springframework.data.jpa.repository.JpaRepository;
+ 
+ import java.util.List;
+ import java.util.Set;
+-
+ public interface SupplierRepository extends JpaRepository<Supplier, Long> {
+-    List<Supplier> findByLocationAndNatureOfBusinessAndManufacturingProcessesIn(
++
++    Page<Supplier> findByLocationAndNatureOfBusinessAndManufacturingProcessesIn(
+             String location,
+-            String natureOfBusiness,
+-            Set<String> manufacturingProcesses,
++            NatureOfBusiness natureOfBusiness,
++            Set<ManufacturingProcess> manufacturingProcesses,
+             Pageable pageable
+     );
+-}
++}
+\ No newline at end of file
+Index: Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/dto/SupplierSearchRequest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Assignment.API.dto;\r\n\r\nimport jakarta.validation.constraints.NotBlank;\r\nimport jakarta.validation.constraints.NotEmpty;\r\nimport jakarta.validation.constraints.Size;\r\nimport org.antlr.v4.runtime.misc.NotNull;\r\n\r\nimport java.util.Set;\r\n// we can use @Getter @Setter also\r\npublic class SupplierSearchRequest {\r\n\r\n    @NotBlank(message = \"location must not be blank\")\r\n    @Size(min = 3,message = \"minimum size of the location should be 3 \")\r\n    private String location;\r\n\r\n    @NotNull\r\n    private String natureOfBusiness;\r\n\r\n    @NotEmpty\r\n    private Set<String> manufacturingProcesses;\r\n\r\n    public String getLocation() {\r\n        return location;\r\n    }\r\n\r\n    public SupplierSearchRequest(String location, Set<String> manufacturingProcesses, String natureOfBusiness) {\r\n        this.location = location;\r\n        this.manufacturingProcesses = manufacturingProcesses;\r\n        this.natureOfBusiness = natureOfBusiness;\r\n    }\r\n\r\n    public void setLocation(String location) {\r\n        this.location = location;\r\n    }\r\n\r\n    public String getNatureOfBusiness() {\r\n        return natureOfBusiness;\r\n    }\r\n\r\n    public void setNatureOfBusiness(String natureOfBusiness) {\r\n        this.natureOfBusiness = natureOfBusiness;\r\n    }\r\n\r\n    public Set<String> getManufacturingProcesses() {\r\n        return manufacturingProcesses;\r\n    }\r\n\r\n    public void setManufacturingProcesses(Set<String> manufacturingProcesses) {\r\n        this.manufacturingProcesses = manufacturingProcesses;\r\n    }\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/dto/SupplierSearchRequest.java b/Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/dto/SupplierSearchRequest.java
+--- a/Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/dto/SupplierSearchRequest.java	(revision 32bc3940623b767ba6a03768eb1b1af07fcc0256)
++++ b/Version-2/API-Makersharks-version-2/src/main/java/Assignment/API/dto/SupplierSearchRequest.java	(date 1724495731128)
+@@ -1,52 +1,30 @@
+ package Assignment.API.dto;
+ 
++import Assignment.API.entity.ManufacturingProcess;
++import Assignment.API.entity.NatureOfBusiness;
+ import jakarta.validation.constraints.NotBlank;
+ import jakarta.validation.constraints.NotEmpty;
+ import jakarta.validation.constraints.Size;
++import lombok.AllArgsConstructor;
++import lombok.Data;
++import lombok.NoArgsConstructor;
+ import org.antlr.v4.runtime.misc.NotNull;
+ 
+ import java.util.Set;
+ // we can use @Getter @Setter also
++@Data
++@AllArgsConstructor
++@NoArgsConstructor
+ public class SupplierSearchRequest {
+ 
+-    @NotBlank(message = "location must not be blank")
+-    @Size(min = 3,message = "minimum size of the location should be 3 ")
++    @NotBlank
+     private String location;
+ 
+     @NotNull
+-    private String natureOfBusiness;
++    private NatureOfBusiness natureOfBusiness;
+ 
+     @NotEmpty
+-    private Set<String> manufacturingProcesses;
+-
+-    public String getLocation() {
+-        return location;
+-    }
+-
+-    public SupplierSearchRequest(String location, Set<String> manufacturingProcesses, String natureOfBusiness) {
+-        this.location = location;
+-        this.manufacturingProcesses = manufacturingProcesses;
+-        this.natureOfBusiness = natureOfBusiness;
+-    }
+-
+-    public void setLocation(String location) {
+-        this.location = location;
+-    }
+-
+-    public String getNatureOfBusiness() {
+-        return natureOfBusiness;
+-    }
++    private Set<ManufacturingProcess> manufacturingProcesses;
+ 
+-    public void setNatureOfBusiness(String natureOfBusiness) {
+-        this.natureOfBusiness = natureOfBusiness;
+-    }
+-
+-    public Set<String> getManufacturingProcesses() {
+-        return manufacturingProcesses;
+-    }
+-
+-    public void setManufacturingProcesses(Set<String> manufacturingProcesses) {
+-        this.manufacturingProcesses = manufacturingProcesses;
+-    }
+-}
+ 
++}
+\ No newline at end of file
+Index: Version-1/API-Makersharks-version-1/src/main/java/Assignment/API/ApiApplication.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Assignment.API;\r\n\r\nimport org.springframework.boot.SpringApplication;\r\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\r\n\r\n@SpringBootApplication\r\npublic class ApiApplication {\r\n\r\n\tpublic static void main(String[] args) {\r\n\t\tSpringApplication.run(ApiApplication.class, args);\r\n\t}\r\n\r\n}\r\n//comment5
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Version-1/API-Makersharks-version-1/src/main/java/Assignment/API/ApiApplication.java b/Version-1/API-Makersharks-version-1/src/main/java/Assignment/API/ApiApplication.java
+--- a/Version-1/API-Makersharks-version-1/src/main/java/Assignment/API/ApiApplication.java	(revision 32bc3940623b767ba6a03768eb1b1af07fcc0256)
++++ b/Version-1/API-Makersharks-version-1/src/main/java/Assignment/API/ApiApplication.java	(date 1724485336408)
+@@ -10,5 +10,4 @@
+ 		SpringApplication.run(ApiApplication.class, args);
+ 	}
+ 
+-}
+-//comment5
+\ No newline at end of file
++}
+\ No newline at end of file
+Index: Version-2/API-Makersharks-version-2/pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n\txsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n\t<modelVersion>4.0.0</modelVersion>\r\n\t<parent>\r\n\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t<artifactId>spring-boot-starter-parent</artifactId>\r\n\t\t<version>3.3.3</version>\r\n\t\t<relativePath/> <!-- lookup parent from repository -->\r\n\t</parent>\r\n\t<groupId>Assignment</groupId>\r\n\t<artifactId>API</artifactId>\r\n\t<version>0.0.1-SNAPSHOT</version>\r\n\t<name>API</name>\r\n\t<description>Demo project for Spring Boot</description>\r\n\t<url/>\r\n\t<licenses>\r\n\t\t<license/>\r\n\t</licenses>\r\n\t<developers>\r\n\t\t<developer/>\r\n\t</developers>\r\n\t<scm>\r\n\t\t<connection/>\r\n\t\t<developerConnection/>\r\n\t\t<tag/>\r\n\t\t<url/>\r\n\t</scm>\r\n\t<properties>\r\n\t\t<java.version>21</java.version>\r\n\t</properties>\r\n\t<dependencies>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter-data-jpa</artifactId>\r\n\t\t</dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter-web</artifactId>\r\n\t\t</dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter-validation</artifactId>\r\n\t\t</dependency>\r\n\r\n\r\n\t\t<dependency>\r\n\t\t\t<groupId>com.mysql</groupId>\r\n\t\t\t<artifactId>mysql-connector-j</artifactId>\r\n\t\t\t<scope>runtime</scope>\r\n\t\t</dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter-test</artifactId>\r\n\t\t\t<scope>test</scope>\r\n\t\t</dependency>\r\n\t</dependencies>\r\n\r\n\t<build>\r\n\t\t<plugins>\r\n\t\t\t<plugin>\r\n\t\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t\t<artifactId>spring-boot-maven-plugin</artifactId>\r\n\t\t\t</plugin>\r\n\t\t</plugins>\r\n\t</build>\r\n\r\n</project>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Version-2/API-Makersharks-version-2/pom.xml b/Version-2/API-Makersharks-version-2/pom.xml
+--- a/Version-2/API-Makersharks-version-2/pom.xml	(revision 32bc3940623b767ba6a03768eb1b1af07fcc0256)
++++ b/Version-2/API-Makersharks-version-2/pom.xml	(date 1724495910609)
+@@ -42,6 +42,13 @@
+ 			<groupId>org.springframework.boot</groupId>
+ 			<artifactId>spring-boot-starter-validation</artifactId>
+ 		</dependency>
++		<dependency>
++			<groupId>org.projectlombok</groupId>
++			<artifactId>lombok</artifactId>
++			<version>1.18.34</version>
++			<scope>provided</scope>
++		</dependency>
++
+ 
+ 
+ 		<dependency>
